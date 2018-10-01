@@ -1,0 +1,8 @@
+#Cours: Processus Stochastiques en biologie
+#Bruno toupance
+#Lundi 24/09/2018
+
+
+#Notes cours
+
+~ formule MSE = esperance((V_estimé-Vréel)^2)

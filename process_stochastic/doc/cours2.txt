@@ -1,0 +1,8 @@
+
+#Notes cours 2 : processus Stochastiques en Biologie
+
+
+~ la caractérisation d'une loi de distribution peut passer par une génération de nombres aléatoires
+et l'observation de leur distribution.
+
+~ la base s'appuie sur une génération de nombres aléatoires suivant une loi uniforme.
