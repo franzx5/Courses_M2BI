@@ -1,2 +1,2 @@
-# Genomic-Analysis
-Repository for the course of Genomic Analysis (Univ Paris-Diderot ~ Karine Audouze)
+# Courses_M2BI
+Repository for the course of M2BI (Univ Paris-Diderot ~ Karine Audouze)
