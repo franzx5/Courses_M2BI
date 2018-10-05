@@ -1,0 +1,4 @@
+load("/Users/Eric/Google Drive/Enseignement/TP_M2_Bioinfo/TP_M2BI_2016/AHC_data/Clinical_annotations.RData")
+dim(annot)
+load("/Users/Eric/Google Drive/Enseignement/TP_M2_Bioinfo/TP_M2BI_2016/AHC_data/expression_matrix_31T_3N_samples.RData")
+dim(exp)

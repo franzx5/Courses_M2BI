@@ -10,10 +10,10 @@
 setwd(dir= "~/Master/Courses_M2BI/analyses_genomiq/src/")
 
 # import libraries
-source("https://bioconductor.org/biocLite.R")
-require(oligo)
-require(annotate)
-require(genefilter)
+# source("https://bioconductor.org/biocLite.R")
+# require(oligo)
+# require(annotate)
+# require(genefilter)
 #library(affy)
 library(pd.mogene.2.0.st)
 library(mogene20sttranscriptcluster.db)
@@ -57,7 +57,7 @@ cat("
 ")
 
 
-cat("Q2 : Combien	de	gènes	uniques	sont	présents? ~ Pourquoi	certains	sont	ils	répliqués ? ")
+cat("Q2 : Combien de gènes uniques	sont	présents? ~ Pourquoi	certains	sont	ils	répliqués ? ")
 nb.unique.genes =  length(GeneNames[!(duplicated(GeneNames)|duplicated(GeneNames, fromLast=TRUE))])
 cat(paste("we have",nb.unique.genes,"unique genes"))
 cat("
@@ -85,7 +85,7 @@ fviz_pca_ind(data.Cel.PCA, habillage = data.Cel.design[,1], addEllipses = F)
 
 #Echantillon_Outlier
 cat("Oui nous avons un echantillon outlier, en l'occurence l'echantillon I
-      Elimination de l'echantillon outlier...")
+      Elimination de l'echantillon outlier...\n")
 ei = ei[,1:9]
 design <- c(rep(c("heal","sick"), each=1, 3), rep(c("heal"),2), rep(c("sick"),1))
 design <- data.frame(design)
@@ -97,21 +97,17 @@ cat("Q4: Réaliser	un	volcano	plot.	Sélectionner	un	seuil.	Pourquoi	avez-vous	c
 #T-tests
 t.pval = rowttests(ei,design$design)$p.value
 names(t.pval) = rownames(ei)
-
 #Fold_change
 fc_cel = rowMeans(ei[, design$design == "heal"]) - rowMeans(ei[, design$design == "sick"])
-
 #Random
 random.labels = sample(design$design)
 perm_t.pval = rowttests(ei, random.labels)$p.value
 perm_fc_cel = rowMeans(ei[, random.labels == "heal"]) - rowMeans(ei[, random.labels == "sick"])
-
 #Visualisation
 plot(fc_cel, t.pval, main = "Volcano Plot", log = "y", xlab = "M (log2 fold change)", 
      ylab = "p-value", pch = 20, col = "blue", xlim = c(-2.5,2.5))
 points(perm_fc_cel, perm_t.pval, type = "p", pch = 20, col = "red")
 legend("topleft", col=c("red","blue"), legend=c("perm", "real"), pch=5, bg="white", cex = 0.5)
-
 abline(v=-2, col="black", lty=4, lwd=2.0)
 abline(v=2, col="black", lty=4, lwd=2.0)
 abline(h=0.008, col="black", lty=4, lwd=2.0) 
