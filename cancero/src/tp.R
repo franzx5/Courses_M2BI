@@ -26,6 +26,7 @@ library(FactoMineR)
 load("../data/AHC_data/expression_matrix_31T_3N_samples.RData")
 load("../data/AHC_data/Clinical_annotations.RData")
 load("../data/AHC_data/expression_array_annotations.RData")
+load("../data/AHC_data/gene_sets.RData")
 
 cat("matrice de taille", dim(exp))
 cat("\nla puce contient", dim(exp)[1], "sondes")
@@ -107,20 +108,31 @@ table(exom_gene_drivers)
 
 #1/
 exp <- exp[which(rowMeans(exp) >= 3),]
+gene_table2 = gene_table[which(gene_table$Probe.Set %in% rownames(exp)),]
 
 #3/
-source("../data/AHC_data/Functions_for_supervised_analysis.R") #loading some add_functions
+#loading some add_functions
+source("../data/AHC_data/Functions_for_supervised_analysis.R") 
 
 #4/ 
-refsamp.input <- c("CHC934N", "CHC926N", "CHC469N")
+refsamp.input <- c("CHC934N", "CHC562N", "CHC469N")
 gpsamp.input <- c("CHC603T", "CHC605T", "CHC950T", "CHC1317T")
+
 #Diff expression analysis
-ExpCompare(exp, refsamp = refsam.input, gpsamp = gpsamp.input, featureTab = gene_table)
+diff_analysis <- ExpCompare(exp, refsamp = refsamp.input,
+                            gpsamp = gpsamp.input, featureTab = gene_table2)
 
 
+#5 / 
+up <- diff_analysis[which(diff_analysis$pval < 0.001 & diff_analysis$FC > 1),]
+down <- diff_analysis[which(diff_analysis$pval < 0.001 & diff_analysis$FC < 1),]
+cat(length(up$Gene.symbol))
+cat(length(down$Gene.symbol))
 
 
-
+#6/
+ enrich_analysis <- enrichmentTest(gene.sets = gene.sets,
+                                   mylist = up$Gene.symbol, possibleIds = gene_table$Gene.symbol)
 
 
 
