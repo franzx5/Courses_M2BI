@@ -68,6 +68,7 @@ My_qlaplace <- function(p){
     return(-log(2*(1-p)))
   }
 }
+
 My_rlaplace <- function(n){
   u = runif(n)
   res = c()
@@ -101,16 +102,16 @@ D_target <- function(x){
   return(output)
 }
 
-R_prop <- function(x, delta){
-  return(runif(1, min = x-delta, max = x+delta))
+R_prop <- function(n, x, delta){ #loi de proposition
+  return(runif(n, min = x-delta, max = x+delta))
 }
 
-My_rtarget <- function(x0, nstep){
+rtarget <- function(x0, nstep){
   vecX = rep(NA, length=nstep)
   vecX[1] = x0
   for (i in 1:nstep){
     x_i = vecX[i]
-    y = R_prop(x_i, 2)
+    y = R_prop(1, x_i, 0.5)
     p = min(1, (D_target(y)/D_target(x_i)))
     if (runif(1, min=0, max=1) < p){
       x_i = y
@@ -121,8 +122,12 @@ My_rtarget <- function(x0, nstep){
 }
 
 #visualisation
-x.points = seq(-10,10, length = 10000)
-lines(x.points, D_target(x.points), col = "red")
+x.points = seq(-10,10, length = 100)
+plot(x.points,D_target(x.points))
+r.points = rtarget(-10, 100)
+lines(r.points, D_target(r.points), col = "red")
+
+lines(D_target(rtarget(-10,10)), col = "red")
 
 
 
