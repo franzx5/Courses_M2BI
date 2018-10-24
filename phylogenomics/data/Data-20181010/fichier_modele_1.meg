@@ -1,0 +1,32 @@
+#MEGA
+!Title ;
+!Format
+   DataType=DNA
+   NSeqs=4 NSites=40
+   Identical=. Missing=? Indel=- ;
+
+[ entre crochets, on peut mettre des commentaires ]
+
+!Domain=D1 Gene=gene1 ;
+#espece1_{groupe1}
+ATGATTGTATAGCCA
+#espece2_{groupe1}
+ATGATTGTAAAGCCA
+#espece3_{groupe2}
+ATGCTTGTATAGCCC
+#espece4_{groupe2}
+ATGATGGTATAGCGA
+
+!Domain=D1 Gene=gene2 ;
+#espece1_{groupe1}
+TAAAAAAAAAAAAAA
+AAAAAAAAAA
+#espece2_{groupe1}
+TAAAAAAAAAAAAAT
+AAAAAAAAAT
+#espece3_{groupe2}
+TAAAAAAAAAAAAAG
+AAAAAAAAAG
+#espece4_{groupe2}
+TAAAAAAAAAAAAAC
+AAAAAAAAAC
